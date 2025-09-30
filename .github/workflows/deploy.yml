@@ -22,9 +22,11 @@ jobs:
         run: npm install
       - name: Build static files
         run: npm run build
+        # THÊM KHỐI NÀY VÀO ĐỂ SỬ DỤNG SECRET
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-        # THÊM LẠI KHỐI NÀY ĐỂ CHỈ ĐÚNG ĐƯỜNG DẪN
         with:
           path: './dist'
 
