@@ -1,0 +1,7 @@
+{
+  "name": "MRS.OANH ENGLISH",
+  "description": "An AI-powered application to practice English conversation with a virtual teacher, Mrs. Oanh. Input topics or phrases you want to practice and have a guided voice chat.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
