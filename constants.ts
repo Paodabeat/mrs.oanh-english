@@ -11,23 +11,38 @@ export const PROFICIENCY_LEVELS: Record<string, string> = {
 export const YOUTUBE_STUDY_LINKS: SavedLink[] = [
   {
     id: 'yt1',
-    title: 'Lợi ích của một bộ não song ngữ - Mia Nacamulli',
+    title: 'The benefits of a bilingual brain',
     url: 'https://www.youtube.com/watch?v=MMmOLN5zBLY',
   },
   {
     id: 'yt2',
-    title: 'Tại sao tiếng Anh lại khó hiểu đến vậy?',
+    title: 'Why is English so confusing?',
     url: 'https://youtu.be/XFhY4Vy3IHc?si=4iSUzvKcjp2FAOPC',
   },
   {
     id: 'yt3',
-    title: 'Jack và cây đậu thần - Truyện cổ tích tiếng Anh',
+    title: 'Jack and the Beanstalk ',
     url: 'https://www.youtube.com/watch?v=9a9qNLUpkV8',
   },
   {
     id: 'yt4',
-    title: 'Nàng Bạch Tuyết - Truyện cổ tích tiếng Anh',
+    title: 'Snow White',
     url: 'https://www.youtube.com/watch?v=wtMUy_3NGl4&t=1s',
+  },
+  {
+    id: 'yt5',
+    title: 'The Bird and the Whale',
+    url: 'https://www.youtube.com/watch?v=FU_0NF_jrgE',
+  },
+  {
+    id: 'yt6',
+    title: 'Sleep to Remember',
+    url: 'https://www.youtube.com/watch?v=gedoSfZvBgE',
+  },
+  {
+    id: 'yt7',
+    title: 'The Wind and the Sun',
+    url: 'https://youtu.be/_z6ZIwKu1bY?si=KpyEM_9O-1nE6Z1n',
   }
 ];
 

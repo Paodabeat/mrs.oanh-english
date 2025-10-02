@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { SavedConversation } from '../types';
 import { teacherAvatar } from '../assets/avatar';
 import { YOUTUBE_STUDY_LINKS } from '../constants';
@@ -29,6 +29,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
 }) => {
     
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [youtubeLinksPage, setYoutubeLinksPage] = useState(1);
+    const LINKS_PER_PAGE = 5;
     
     const handleUploadClick = () => {
         fileInputRef.current?.click();
@@ -42,6 +44,11 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
             day: 'numeric',
         });
     }
+
+    // Pagination logic for YouTube links
+    const totalYoutubePages = Math.ceil(YOUTUBE_STUDY_LINKS.length / LINKS_PER_PAGE);
+    const youtubeStartIndex = (youtubeLinksPage - 1) * LINKS_PER_PAGE;
+    const currentYoutubeLinks = YOUTUBE_STUDY_LINKS.slice(youtubeStartIndex, youtubeStartIndex + LINKS_PER_PAGE);
 
     return (
         <>
@@ -132,14 +139,14 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
                         <div className="flex justify-between items-center gap-4 mb-4">
                             <h2 className="text-xl font-bold text-gray-800">YouTube Study Links</h2>
                         </div>
-                        <div className="max-h-[40vh] overflow-y-auto pr-2">
+                        <div>
                             {YOUTUBE_STUDY_LINKS.length === 0 ? (
                                 <div className="text-center py-10 text-gray-500">
                                     <p>No study links have been added yet.</p>
                                 </div>
                             ) : (
                                 <ul className="space-y-3">
-                                    {YOUTUBE_STUDY_LINKS.map(link => {
+                                    {currentYoutubeLinks.map(link => {
                                         const videoId = getYouTubeVideoId(link.url);
                                         return (
                                             <li key={link.id} className="flex items-center p-2 bg-gray-50 rounded-lg border border-gray-200 justify-between">
@@ -165,6 +172,40 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
                                 </ul>
                             )}
                         </div>
+                        {totalYoutubePages > 1 && (
+                            <div className="flex justify-center items-center pt-4 mt-4 border-t border-gray-200">
+                                <nav aria-label="YouTube Links Pagination" className="flex items-center gap-2">
+                                    <button
+                                        onClick={() => setYoutubeLinksPage(p => p - 1)}
+                                        disabled={youtubeLinksPage === 1}
+                                        className="px-3 py-1 rounded-md text-sm font-medium transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
+                                    >
+                                        Prev
+                                    </button>
+                                    {Array.from({ length: totalYoutubePages }, (_, i) => i + 1).map(pageNumber => (
+                                        <button
+                                            key={pageNumber}
+                                            onClick={() => setYoutubeLinksPage(pageNumber)}
+                                            className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                                                pageNumber === youtubeLinksPage 
+                                                ? 'bg-blue-500 text-white cursor-default' 
+                                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                            }`}
+                                            aria-current={pageNumber === youtubeLinksPage ? 'page' : undefined}
+                                        >
+                                            {pageNumber}
+                                        </button>
+                                    ))}
+                                    <button
+                                        onClick={() => setYoutubeLinksPage(p => p + 1)}
+                                        disabled={youtubeLinksPage === totalYoutubePages}
+                                        className="px-3 py-1 rounded-md text-sm font-medium transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
+                                    >
+                                        Next
+                                    </button>
+                                </nav>
+                            </div>
+                        )}
                     </div>
                 </div>
                  <footer className="text-center text-gray-400 text-xs mt-4">
