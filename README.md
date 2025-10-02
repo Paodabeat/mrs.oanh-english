@@ -4,7 +4,6 @@ AI Voice Chat for English Speaking Practice
  🤗 Mrs.Oanh English is an application I built for my mother, an English teacher, to help learners practice speaking English naturally through AI Voice Chat.
 
  🧐 Learners can create and engage in conversations based on their chosen vocabulary or sentence patterns. The app generates dialogues within specific topics or situations, allowing learners to practice communication, pronunciation, and real usage of English expressions.
-
  📌Key Features:
   - Create Lessons: Enter a topic, sentence patterns, and vocabulary; select one of three levels (Beginner – Intermediate – Advanced); add an avatar (upload or AI-generated – AI generation currently under development).
   - Download & Save Data: Learners can save their created lessons locally.
