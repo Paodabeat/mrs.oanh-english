@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenAI, Chat, GenerateContentResponse, Content } from "@google/genai";
 import useSpeech from './hooks/useSpeech';
