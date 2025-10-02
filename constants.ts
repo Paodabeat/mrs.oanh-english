@@ -30,3 +30,5 @@ export const YOUTUBE_STUDY_LINKS: SavedLink[] = [
     url: 'https://www.youtube.com/watch?v=wtMUy_3NGl4&t=1s',
   }
 ];
+
+export const HOME_AVATAR_URL = './assets/mrsoanh-avarta.jpg';

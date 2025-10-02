@@ -36,3 +36,9 @@ export interface SavedConversation {
   timestamp: string;
   botName: string;
 }
+
+export interface SavedLink {
+    id: string;
+    title: string;
+    url: string;
+}
