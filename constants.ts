@@ -47,3 +47,10 @@ export const YOUTUBE_STUDY_LINKS: SavedLink[] = [
 ];
 
 export const HOME_AVATAR_URL = './assets/mrsoanh-avarta.jpg';
+
+export const SOCIAL_LINKS = {
+  facebook: 'https://www.facebook.com/phungtrangiabao/',
+  youtube: 'https://www.youtube.com/@paodabeat6731',
+  tiktok: 'https://www.tiktok.com/@paodabeat',
+  linkedin: 'https://www.linkedin.com/in/paodabeat/',
+};

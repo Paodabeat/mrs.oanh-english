@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { SavedConversation } from '../types';
 import { teacherAvatar } from '../assets/avatar';
-import { YOUTUBE_STUDY_LINKS } from '../constants';
+import { YOUTUBE_STUDY_LINKS, SOCIAL_LINKS } from '../constants';
 import mrsOanhAvatar from '../assets/mrsoanh-avarta.jpg';
 
 const getYouTubeVideoId = (url: string): string | null => {
@@ -18,6 +18,13 @@ interface HomeScreenProps {
   onSaveData: () => void;
   onUploadData: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+// SVG Icons for Social Media
+const FacebookIcon = () => (<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg>);
+const YouTubeIcon = () => (<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.25,4,12,4,12,4S5.75,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.75,2,12,2,12s0,4.25,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.75,20,12,20,12,20s6.25,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.25,22,12,22,12S22,7.75,21.582,6.186z M10,15.5v-7l6,3.5L10,15.5z" /></svg>);
+const TikTokIcon = () => (<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.03-4.83-.95-6.43-2.88-1.59-1.94-2.16-4.54-1.72-6.95.31-1.62 1.15-3.19 2.4-4.25s2.9-1.62 4.54-1.68c.24-.01 1.29-.01 1.53-.01v4.39c-.45.01-.9.06-1.34.19-1.25.37-2.34 1.1-2.93 2.25-.66 1.29-.8 2.87-.41 4.25.41 1.48 1.51 2.65 2.95 2.97.1.02.2.04.3.05.61.12 1.25.12 1.86-.02 1.4-.33 2.51-1.28 3.1-2.6.43-.96.55-2.08.55-3.11V4.54c-.9.23-1.78.5-2.6.85-.3.12-.6.25-.9.37V.02z" /></svg>);
+const LinkedInIcon = () => (<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>);
+
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ 
     savedConversations, 
@@ -50,7 +57,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
     const youtubeStartIndex = (youtubeLinksPage - 1) * LINKS_PER_PAGE;
     const currentYoutubeLinks = YOUTUBE_STUDY_LINKS.slice(youtubeStartIndex, youtubeStartIndex + LINKS_PER_PAGE);
 
-    return (
+return (
         <>
             <div className="flex flex-col h-full p-4 sm:p-6 lg:p-8">
                 <header className="text-center mb-8">
@@ -208,8 +215,22 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
                         )}
                     </div>
                 </div>
-                 <footer className="text-center text-gray-400 text-xs mt-4">
-                    <p>Select a past conversation to review, or start a new one.</p>
+                 <footer className="text-center text-gray-500 text-sm mt-8 py-4 border-t border-gray-200">
+                    <div className="flex justify-center items-center space-x-6 mb-4">
+                        <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-blue-600 transition-colors" aria-label="Facebook">
+                            <FacebookIcon />
+                        </a>
+                        <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-600 transition-colors" aria-label="YouTube">
+                            <YouTubeIcon />
+                        </a>
+                        <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-black transition-colors" aria-label="TikTok">
+                            <TikTokIcon />
+                        </a>
+                        <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-blue-700 transition-colors" aria-label="LinkedIn">
+                            <LinkedInIcon />
+                        </a>
+                    </div>
+                    <p className="text-xs text-gray-400">An EdTech Product of Paodabeat</p>
                 </footer>
             </div>
         </>
