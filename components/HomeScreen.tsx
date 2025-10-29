@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { SavedConversation } from '../types';
+import { SavedConversation, SavedLesson } from '../types';
 import { teacherAvatar } from '../assets/avatar';
-import { YOUTUBE_STUDY_LINKS, SOCIAL_LINKS } from '../constants';
-import mrsOanhAvatar from '../assets/mrsoanh-avarta.jpg';
+import { YOUTUBE_STUDY_LINKS, SOCIAL_LINKS, MY_LESSONS } from '../constants';
+import LessonViewerModal from './LessonViewerModal';
 
 const getYouTubeVideoId = (url: string): string | null => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -25,6 +25,19 @@ const YouTubeIcon = () => (<svg className="w-6 h-6" fill="currentColor" viewBox=
 const TikTokIcon = () => (<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.03-4.83-.95-6.43-2.88-1.59-1.94-2.16-4.54-1.72-6.95.31-1.62 1.15-3.19 2.4-4.25s2.9-1.62 4.54-1.68c.24-.01 1.29-.01 1.53-.01v4.39c-.45.01-.9.06-1.34.19-1.25.37-2.34 1.1-2.93 2.25-.66 1.29-.8 2.87-.41 4.25.41 1.48 1.51 2.65 2.95 2.97.1.02.2.04.3.05.61.12 1.25.12 1.86-.02 1.4-.33 2.51-1.28 3.1-2.6.43-.96.55-2.08.55-3.11V4.54c-.9.23-1.78.5-2.6.85-.3.12-.6.25-.9.37V.02z" /></svg>);
 const LinkedInIcon = () => (<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>);
 
+const PdfIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M5.521,3.321 C5.748,3.123 6.01,3 6.25,3 L12.25,3 C12.664,3 13,3.336 13,3.75 C13,4.164 12.664,4.5 12.25,4.5 L6.25,4.5 C6.18,4.5 6.111,4.516 6.046,4.545 L13.25,11.75 C13.664,12.164 13.664,12.836 13.25,13.25 C12.836,13.664 12.164,13.664 11.75,13.25 L4.545,6.046 C4.516,6.111 4.5,6.18 4.5,6.25 L4.5,12.25 C4.5,12.664 4.164,13 3.75,13 C3.336,13 3,12.664 3,12.25 L3,6.25 C3,6.01 3.123,5.748 3.321,5.521 L5.521,3.321 Z" transform="translate(2 2)"/>
+        <path d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V7.414a2 2 0 00-.586-1.414l-4-4A2 2 0 0011.414 2H4zm8 1.586L15.414 7H12V3.586zM4 16V4h7v4a1 1 0 001 1h4v7H4z" />
+    </svg>
+);
+
+const LessonYoutubeIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.002v4.005a1 1 0 001.555.833l3.197-2.003a1 1 0 000-1.664l-3.197-2.003z" clipRule="evenodd" />
+    </svg>
+);
+
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ 
     savedConversations, 
@@ -37,6 +50,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
     
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [youtubeLinksPage, setYoutubeLinksPage] = useState(1);
+    const [modalContent, setModalContent] = useState<SavedLesson | null>(null);
+
     const LINKS_PER_PAGE = 5;
     
     const handleUploadClick = () => {
@@ -57,21 +72,21 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
     const youtubeStartIndex = (youtubeLinksPage - 1) * LINKS_PER_PAGE;
     const currentYoutubeLinks = YOUTUBE_STUDY_LINKS.slice(youtubeStartIndex, youtubeStartIndex + LINKS_PER_PAGE);
 
-return (
+    return (
         <>
             <div className="flex flex-col h-full p-4 sm:p-6 lg:p-8">
                 <header className="text-center mb-8">
-                    <img src={mrsOanhAvatar} alt="Mrs.Oanh" className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-contain p-2" />
+                    <img src="assets/mrsoanh-avarta.jpg" alt="Mrs.Oanh" className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-contain p-2" />
                     <h1 className="text-3xl sm:text-4xl font-bold text-blue-900">MRS.OANH ENGLISH</h1>
                     <p className="text-gray-600 mt-2">Your AI-powered English practice partner.</p>
                 </header>
 
-                <div className="flex-grow w-full max-w-2xl mx-auto space-y-6">
-                    <div className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100">
+                <div className="flex-grow w-full max-w-5xl mx-auto space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
+                     <div className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100 lg:col-span-1 flex flex-col">
                         <div className="flex flex-wrap justify-between items-center gap-4 mb-4">
                             <h2 className="text-xl font-bold text-gray-800">Conversation History</h2>
-                            <div className="flex items-center gap-2">
-                                <input
+                             <div className="flex items-center gap-2">
+                                 <input
                                     type="file"
                                     ref={fileInputRef}
                                     onChange={onUploadData}
@@ -82,13 +97,13 @@ return (
                                     onClick={handleUploadClick}
                                     className="bg-gray-500 text-white font-semibold py-2 px-3 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 text-sm"
                                 >
-                                    Upload
+                                    Upload Data
                                 </button>
                                  <button 
                                     onClick={onSaveData}
                                     className="bg-indigo-500 text-white font-semibold py-2 px-3 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-sm"
                                 >
-                                    Save
+                                    Save Data
                                 </button>
                                 <button 
                                     onClick={onStartNew}
@@ -99,7 +114,7 @@ return (
                             </div>
                         </div>
                         
-                        <div className="max-h-[50vh] overflow-y-auto pr-2">
+                        <div className="flex-grow max-h-96 overflow-y-auto pr-2">
                             {savedConversations.length === 0 ? (
                                 <div className="text-center py-10 text-gray-500">
                                     <p>No saved conversations yet.</p>
@@ -141,8 +156,38 @@ return (
                             )}
                         </div>
                     </div>
+                    
+                    <div className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100 lg:col-span-1 flex flex-col">
+                         <h2 className="text-xl font-bold text-gray-800 mb-4">My Lessons</h2>
+                         <div className="flex-grow max-h-96 overflow-y-auto pr-2">
+                             {MY_LESSONS.length === 0 ? (
+                                <div className="text-center py-10 text-gray-500">
+                                    <p>No lessons have been added yet.</p>
+                                </div>
+                             ) : (
+                                <ul className="space-y-3">
+                                    {MY_LESSONS.map(lesson => (
+                                        <li key={lesson.id}>
+                                            <button 
+                                                onClick={() => setModalContent(lesson)}
+                                                className="w-full flex items-start text-left p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-300 transition-colors duration-200"
+                                            >
+                                                <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center mr-4">
+                                                    {lesson.type === 'pdf' ? <PdfIcon /> : <LessonYoutubeIcon />}
+                                                </div>
+                                                <div className="flex-grow">
+                                                    <p className="font-semibold text-blue-800">{lesson.title}</p>
+                                                    <p className="text-sm text-gray-500">{lesson.description}</p>
+                                                </div>
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                             )}
+                         </div>
+                    </div>
 
-                    <div className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100 lg:col-span-2">
                         <div className="flex justify-between items-center gap-4 mb-4">
                             <h2 className="text-xl font-bold text-gray-800">YouTube Study Links</h2>
                         </div>
@@ -168,7 +213,7 @@ return (
                                                     <p className="font-semibold text-blue-800 truncate" title={link.title}>{link.title}</p>
                                                 </div>
                                                 <button 
-                                                    onClick={() => window.open(link.url, '_blank', 'noopener,noreferrer')}
+                                                    onClick={() => setModalContent({ id: link.id, title: link.title, url: link.url, type: 'video', description: '' })}
                                                     className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-sm flex-shrink-0 ml-4"
                                                 >
                                                     Watch
@@ -233,6 +278,7 @@ return (
                     <p className="text-xs text-gray-400">An EdTech Product of Paodabeat</p>
                 </footer>
             </div>
+             <LessonViewerModal lesson={modalContent} onClose={() => setModalContent(null)} />
         </>
     );
 };

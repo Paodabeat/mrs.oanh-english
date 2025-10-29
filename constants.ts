@@ -1,4 +1,4 @@
-import { SavedLink } from "./types";
+import { SavedLink, SavedLesson } from "./types";
 
 export const BASE_SYSTEM_INSTRUCTION = `You are {botName}, a friendly, patient, and encouraging English teacher. Your student wants to practice speaking English. Your goal is to have a natural conversation based on the topic or phrases they provide. Keep your responses short and clear, suitable for an English learner. Ask questions to keep the conversation going. Always be positive and supportive. Always speak in English. Don't use icon or ** in your conversation.`;
 
@@ -7,6 +7,24 @@ export const PROFICIENCY_LEVELS: Record<string, string> = {
   intermediate: "Adapt your language for an intermediate English learner. Use a broader range of vocabulary on topics like travel, hobbies, and technology. Use more diverse sentence structures, including compound and simple complex sentences. Make your responses a bit longer, around 2-3 sentences, and ask open-ended questions to encourage the user to speak more and express their opinions in more detail.",
   advanced: "Adapt your language for an advanced English learner. Use complex and academic vocabulary (e.g., sustainable, implications, perspective) and complex grammatical structures like conditional sentences and advanced tenses. Your responses should be longer, containing arguments and challenging questions to stimulate critical thinking and discussion. Aim to sound natural, like a native speaker, and you can introduce idioms or colloquial phrases where appropriate.",
 };
+
+export const MY_LESSONS: SavedLesson[] = [
+  {
+    id: 'lesson1',
+    title: 'Video Slide Thao Giảng 20/10 - English 4A',
+    type: 'video',
+    url: 'https://drive.google.com/file/d/15Y1Ln6rmRR3hoNy0GZtVMV-3fhwEpfpl/view?usp=sharing',
+    description: 'A comprehensive PDF guide from Google Drive covering the basics of English grammar.',
+  },
+  {
+    id: 'lesson2',
+    title: 'Slide Thao Giảng 20/10 - English 4A',
+    type: 'pdf',
+    url: 'https://drive.google.com/file/d/1kA8YC29pZfM3tuTfTcFYVI2cGl2DgMnH/view?usp=sharing',
+    description: 'Watch a video lesson from Google Drive to learn essential phrases for traveling abroad.',
+  },
+];
+
 
 export const YOUTUBE_STUDY_LINKS: SavedLink[] = [
   {
@@ -45,8 +63,6 @@ export const YOUTUBE_STUDY_LINKS: SavedLink[] = [
     url: 'https://youtu.be/_z6ZIwKu1bY?si=KpyEM_9O-1nE6Z1n',
   }
 ];
-
-export const HOME_AVATAR_URL = './assets/mrsoanh-avarta.jpg';
 
 export const SOCIAL_LINKS = {
   facebook: 'https://www.facebook.com/phungtrangiabao/',
