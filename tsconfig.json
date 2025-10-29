@@ -24,9 +24,14 @@
       ]
     },
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
   },
   
-  // THÊM KHỐI NÀY VÀO
-  "include": ["src", "**/*.d.ts"]
+  "include": [
+    "src"
+  ],
+
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -3,7 +3,7 @@ import { SavedConversation, SavedLesson } from '../types';
 import { teacherAvatar } from '../assets/avatar';
 import { YOUTUBE_STUDY_LINKS, SOCIAL_LINKS, MY_LESSONS } from '../constants';
 import LessonViewerModal from './LessonViewerModal';
-import mrsOanhAvatar from '../assets/mrsOanh-avarta.jpg';
+import mrsOanhAvatar from '../assets/mrsoanh-avatar.jpg';
 
 const getYouTubeVideoId = (url: string): string | null => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
