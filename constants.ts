@@ -14,14 +14,14 @@ export const MY_LESSONS: SavedLesson[] = [
     title: 'Video Slide Thao Giảng 20/10 - English 4A',
     type: 'video',
     url: 'https://drive.google.com/file/d/15Y1Ln6rmRR3hoNy0GZtVMV-3fhwEpfpl/view?usp=sharing',
-    description: 'A comprehensive PDF guide from Google Drive covering the basics of English grammar.',
+    description: 'Video Slide Thao Giảng ngày 20/10 - English 4A',
   },
   {
     id: 'lesson2',
     title: 'Slide Thao Giảng 20/10 - English 4A',
     type: 'pdf',
     url: 'https://drive.google.com/file/d/1kA8YC29pZfM3tuTfTcFYVI2cGl2DgMnH/view?usp=sharing',
-    description: 'Watch a video lesson from Google Drive to learn essential phrases for traveling abroad.',
+    description: 'PDF Slide Thao Giảng ngày 20/10 - English 4A',
   },
 ];
 
