@@ -3,6 +3,7 @@ import { SavedConversation, SavedLesson } from '../types';
 import { teacherAvatar } from '../assets/avatar';
 import { YOUTUBE_STUDY_LINKS, SOCIAL_LINKS, MY_LESSONS } from '../constants';
 import LessonViewerModal from './LessonViewerModal';
+import mrsOanhAvatar from '../assets/mrsOanh-avarta.jpg';
 
 const getYouTubeVideoId = (url: string): string | null => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -76,7 +77,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({
         <>
             <div className="flex flex-col h-full p-4 sm:p-6 lg:p-8">
                 <header className="text-center mb-8">
-                    <img src="assets/mrsoanh-avarta.jpg" alt="Mrs.Oanh" className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-contain p-2" />
+                    <img src={mrsOanhAvatar} alt="Mrs.Oanh" className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-white shadow-lg object-contain p-2" />
                     <h1 className="text-3xl sm:text-4xl font-bold text-blue-900">MRS.OANH ENGLISH</h1>
                     <p className="text-gray-600 mt-2">Your AI-powered English practice partner.</p>
                 </header>
