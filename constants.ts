@@ -23,6 +23,20 @@ export const MY_LESSONS: SavedLesson[] = [
     url: 'https://drive.google.com/file/d/1kA8YC29pZfM3tuTfTcFYVI2cGl2DgMnH/view?usp=sharing',
     description: 'PDF Slide Thao Giảng ngày 20/10 - English 4A',
   },
+  {
+    id: 'lesson3',
+    title: 'English 3 - Unit 3 - School Things',
+    type: 'pdf',
+    url: 'https://drive.google.com/file/d/1Cm_p-ewCsgRPn68Pzg3NkbcySvAUoDMd/view?usp=sharing',
+    description: 'PDF Slide Thao Giảng ngày 20/10 - English 4A',
+  },
+  {
+    id: 'lesson4',
+    title: 'English 5 - Unit 4 - L1 Discovery',
+    type: 'pdf',
+    url: 'https://drive.google.com/file/d/1_hQTOxYzivjpavoogCy3kk8WiiDc2_cg/view?usp=sharing',
+    description: 'PDF Slide Thao Giảng ngày 20/10 - English 4A',
+  },
 ];
 
 
